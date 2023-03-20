@@ -32,7 +32,7 @@ function App() {
         {/* loads image from PUBLIC FOLDER */}
         <div><img src="./pizza.jpeg" /></div>
         {/* loads image  from SRC folder */}
-        <div><img src={pizzaImg} /></div>
+        {/* <div><img src={pizzaImg} /></div> */}
         <div>{product.name}</div>
         <div className="price">{product.price}</div>
         {/* RABATT PREIS FORMEL */}
