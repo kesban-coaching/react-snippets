@@ -40,3 +40,8 @@ button {
   font-size: 1.3rem;
   text-align: center;
 }
+
+input {
+  padding: 10px;
+  margin: 5px;
+}

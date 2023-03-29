@@ -3,10 +3,13 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  // state variable that holds the search of the user
+  const [search, setSearch] = useState("")
+
   const [posts, setPosts] = useState([
     // objects
     { title: "Yadda Yadda", date: "2022-10-01", author: "Rob" },
-    { title: "Bla", date: "2022-10-01", author: "Kesban" },
+    { title: "Kesbans Post", date: "2022-10-01", author: "Kesban" },
     { title: "Blubb", date: "2022-10-01", author: "Edward" },
   ]);
 
@@ -21,20 +24,33 @@ function App() {
   // 7) then map takes the NEXT object and puts it into the variable post
   // 8) and so on...
   const htmlPostCards = posts.map((post) => {
-    return (
-      <div className="post-card">
-        <h3>{post.title}</h3>
-        <div>
-          {post.date} by {post.author}
+
+    // in case we find the user search term in the title of the post 
+    // => return the item and convert it to a DIV
+    // search by multiple criteria using LOGICAL OR in if
+    // if(post.title.includes(search) && post.author.includes(search) ) {
+    if(post.title.includes(search) || post.author.includes(search) ) {
+      
+      return (
+        <div key={post.title} className="post-card">
+          <h3>{post.title}</h3>
+          <div>
+            {post.date} by {post.author}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
   });
 
   // layout
   return (
     <div className="App">
       <header className="App-header">
+        <div>
+          {/* onChange is triggered by user typing in INPUT field */}
+          <input type="text" placeholder="Search..." onChange={(event) => { setSearch(event.target.value) }}  />
+        </div>
         <div className="post-cards">
           {/* the generated post cards */}
           {htmlPostCards}
