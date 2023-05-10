@@ -20,12 +20,13 @@ function App() {
   console.log({searchTerm, filterFavorites})
   if(searchTerm || filterFavorites) {
     filteredBooks = books.filter((book) => {
-      // check if search term is included in book title
-      // if so: tell filter to add this book to new array (by returning true)
       if (
+        // check if search term is included in book title
         book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        // check if we just want favorites to get included
         (filterFavorites ? book.favorite === true : true)
       ) {
+        // if matching: tell filter to add this book to new array (by returning true)
         return true;
       }
     });
