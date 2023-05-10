@@ -4,34 +4,38 @@ import "./App.css";
 function App() {
   // DATA
   const [books, setBooks] = useState([
-    { id: "1", title: "Guide to Happiness" },
-    { id: "2", title: "Guide to Coding" },
-    { id: "3", title: "Guide to Whatever" },
+    { id: "1", favorite: true, title: "Guide to Happiness" },
+    { id: "2", favorite: true, title: "Guide to Coding" },
+    { id: "3", favorite: false, title: "Guide to Whatever" },
   ]);
-  const [filteredBooks, setFilteredBooks] = useState(books)
+
+  // FILTER states
+  const [searchTerm, setSearchTerm] = useState("")
+  const [filterFavorites, setFilterFavorites] = useState(false);
 
   // FUNCTIONS
 
   // LIVE search
-  // call this function whenever the user types / changes the search terms
-  const onSearch = (searchTerm) => {
-    console.log({ searchTerm })
-
-    // if user has search term => filter books by search word
-    const filteredBooks = books.filter((book) => {
+  let filteredBooks = books
+  console.log({searchTerm, filterFavorites})
+  if(searchTerm || filterFavorites) {
+    filteredBooks = books.filter((book) => {
       // check if search term is included in book title
       // if so: tell filter to add this book to new array (by returning true)
-      if (book.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+      if (
+        book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (filterFavorites ? book.favorite === true : true)
+      ) {
         return true;
       }
-    })
-    console.log(filteredBooks)
-    // update books in UI and just show filtered books
-    setFilteredBooks(filteredBooks)
-  }
+    });
+  };
+  console.log(filteredBooks)
 
   // create HTML list of books by converting data to divs
-  const htmlBooks = filteredBooks.map((book) => <div key={book.id}>{book.title}</div>);
+  const htmlBooks = filteredBooks.map((book) => (
+    <div key={book.id}>{book.title}</div>
+  ));
 
   return (
     <div className="App">
@@ -39,7 +43,19 @@ function App() {
         <div className="books-container">
           <div className="search-form">
             <div className="search-input">
-              <input onChange={ (e) => onSearch(e.target.value) } type="text" placeholder="Enter text here..." />
+              <input
+                onChange={(e) => setSearchTerm(e.target.value)}
+                type="text"
+                placeholder="Enter text here..."
+              />
+            </div>
+            <div className="search-favorite">
+              <label>Favorites only:</label>
+              {/* when user hits checkbox => store his setting in filterFavorites variable */}
+              <input
+                type="checkbox"
+                onChange={(e) => setFilterFavorites(e.target.checked)}
+              />
             </div>
           </div>
           <div className="book-list">{htmlBooks}</div>
