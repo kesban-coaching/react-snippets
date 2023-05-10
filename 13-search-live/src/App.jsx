@@ -13,11 +13,10 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [filterFavorites, setFilterFavorites] = useState(false);
 
-  // FUNCTIONS
-
-  // LIVE search
+  // start with ALL books
   let filteredBooks = books
-  console.log({searchTerm, filterFavorites})
+
+  // whenever user changed searchTerm or favorites flag => re-do filtering of books
   if(searchTerm || filterFavorites) {
     filteredBooks = books.filter((book) => {
       if (
@@ -45,6 +44,7 @@ function App() {
           <div className="search-form">
             <div className="search-input">
               <input
+              // when user types => store search term in state for later...
                 onChange={(e) => setSearchTerm(e.target.value)}
                 type="text"
                 placeholder="Enter text here..."
@@ -52,7 +52,7 @@ function App() {
             </div>
             <div className="search-favorite">
               <label>Favorites only:</label>
-              {/* when user hits checkbox => store his setting in filterFavorites variable */}
+              {/* when user hits checkbox => store his setting in filterFavorites variable for later.. */}
               <input
                 type="checkbox"
                 onChange={(e) => setFilterFavorites(e.target.checked)}
