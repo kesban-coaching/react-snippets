@@ -5,8 +5,8 @@ function App() {
   // DATA
   const [books, setBooks] = useState([
     { id: "1", title: "Guide to Happiness" },
-    { id: "2", title: "Guide to Sickness" },
-    { id: "3", title: "Guide to Coding" },
+    { id: "2", title: "Guide to Coding" },
+    { id: "3", title: "Guide to Whatever" },
   ]);
 
   // FUNCTIONS

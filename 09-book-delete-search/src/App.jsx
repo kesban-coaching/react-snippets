@@ -5,7 +5,7 @@ function App() {
   const [books, setBooks] = useState([
     { id: 1, title: "JS for Dummies", author: "Richard Warna" },
     { id: 2, title: "The Notebook", author: "Unknown Author" },
-    { id: 3, title: "Bla", author: "Blub" },
+    { id: 3, title: "Bla", author: "Blub Blub" },
   ]);
 
   // GENERATE HTML LIST
